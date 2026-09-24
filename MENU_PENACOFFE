@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Cafe Kita</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f8f9fa; 
+            margin: 0; 
+            padding: 20px; 
+            text-align: center; 
+        }
+        .tabs { 
+            margin-bottom: 20px; 
+        }
+        button { 
+            padding: 10px 20px; 
+            margin: 5px; 
+            cursor: pointer; 
+            border: none; 
+            background: #ddd; 
+            border-radius: 5px; 
+            font-weight: bold; 
+        }
+        button.active { 
+            background: #d97706; 
+            color: white; 
+        }
+        .menu-item { 
+            display: none; 
+            background: white; 
+            padding: 15px; 
+            margin: 10px auto; 
+            max-width: 400px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            text-align: left; 
+        }
+        .menu-item.show { 
+            display: block; 
+        }
+        .harga { 
+            color: #d97706; 
+            font-weight: bold; 
+            float: right; 
+        }
+    </style>
+</head>
+<body>
+
+    <h2>☕ Daftar Menu</h2>
+
+    <!-- Tombol Kategori -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="filterMenu('semua', this)">Semua</button>
+        <button class="tab-btn" onclick="filterMenu('kopi', this)">Kopi</button>
+        <button class="tab-btn" onclick="filterMenu('mocktail', this)">Mocktail</button>
+    </div>
+
+    <!-- Daftar Produk -->
+    <div class="menu-item kopi show">
+        <span class="harga">Rp 18.000</span>
+        <h3>Es Kopi Susu Gula Aren</h3>
+        <p style="font-size: 14px; color: #555;">Kopi espresso dengan susu segar dan aren asli.</p>
+    </div>
+    
+    <div class="menu-item mocktail show">
+        <span class="harga">Rp 22.000</span>
+        <h3>Ocean Blue Mocktail</h3>
+        <p style="font-size: 14px; color: #555;">Soda segar dengan sirup blue curacao & lemon.</p>
+    </div>
+    
+    <div class="menu-item kopi show">
+        <span class="harga">Rp 15.000</span>
+        <h3>Americano Dingin</h3>
+        <p style="font-size: 14px; color: #555;">Espresso murni dengan air es segar.</p>
+    </div>
+
+    <!-- Logika JavaScript untuk interaksi Tab -->
+    <script>
+        function filterMenu(kategori, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('show');
+                if(kategori === 'semua' || item.classList.contains(kategori)) {
+                    item.classList.add('show');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
