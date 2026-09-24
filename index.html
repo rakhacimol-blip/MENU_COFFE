@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="id" class="dark scroll-smooth">
+<html lang="id" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Cafe Kita - Premium Coffee & Eatery</title>
-    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
@@ -24,14 +21,12 @@
                             400: '#fbbf24',
                             500: '#f59e0b',
                             600: '#d97706',
-                            700: '#b45309',
                         },
-                        espresso: {
-                            950: '#0c0a09',
-                            900: '#141210',
-                            800: '#1f1b18',
-                            700: '#2c2723',
-                            600: '#423b35'
+                        dark: {
+                            900: '#0c0a09',
+                            800: '#1c1917',
+                            700: '#292524',
+                            600: '#44403c'
                         }
                     },
                     fontFamily: {
@@ -43,47 +38,32 @@
     </script>
 
     <style>
-        /* Custom Smooth Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
-            height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #0c0a09;
+            background: #1c1917;
         }
         ::-webkit-scrollbar-thumb {
             background: #d97706;
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #f59e0b;
+            border-radius: 10px;
         }
 
-        /* Glassmorphism Classes */
         .glass-panel {
-            background: rgba(20, 18, 16, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(245, 158, 11, 0.15);
-        }
-
-        .glass-card {
-            background: rgba(31, 27, 24, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(28, 25, 23, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(251, 191, 36, 0.15);
         }
 
         .card-hover {
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .card-hover:hover {
-            transform: translateY(-5px) scale(1.01);
-            border-color: rgba(245, 158, 11, 0.35);
-            box-shadow: 0 16px 32px -8px rgba(217, 119, 6, 0.2);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px -5px rgba(217, 119, 6, 0.25);
         }
 
-        /* Hide Horizontal Scrollbars */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -91,371 +71,294 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
-        /* Shimmer Loading Animation */
-        @keyframes shimmer {
-            100% { transform: translateX(100%); }
-        }
-        .shimmer {
-            position: relative;
-            overflow: hidden;
-        }
-        .shimmer::after {
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            transform: translateX(-100%);
-            background-image: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0) 0,
-                rgba(255, 255, 255, 0.05) 20%,
-                rgba(255, 255, 255, 0.1) 60%,
-                rgba(255, 255, 255, 0)
-            );
-            animation: shimmer 2s infinite;
-            content: '';
-        }
     </style>
 </head>
-<body class="bg-espresso-950 text-stone-100 font-sans antialiased min-h-screen pb-28 selection:bg-amber-500 selection:text-black">
+<body class="bg-dark-900 text-stone-100 font-sans antialiased min-h-screen pb-24 selection:bg-amber-500 selection:text-black">
 
-    <!-- Ambient Glowing Background Elements -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-amber-600/15 via-amber-900/5 to-transparent blur-3xl pointer-events-none z-0"></div>
-    <div class="fixed bottom-0 right-0 w-80 h-80 bg-amber-500/5 blur-3xl pointer-events-none z-0"></div>
+    <!-- Ambient Glow background -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-amber-600/10 via-amber-900/5 to-transparent blur-3xl pointer-events-none z-0"></div>
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-stone-800/80 shadow-xl">
+    <!-- Header Section -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-stone-800">
         <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 flex items-center justify-center text-espresso-950 font-black text-xl shadow-lg shadow-amber-500/20 transform hover:rotate-6 transition-transform">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center text-dark-900 font-bold text-xl shadow-lg shadow-amber-600/30">
                     ☕
                 </div>
                 <div>
-                    <h1 class="font-black text-lg sm:text-xl text-white tracking-tight flex items-center gap-2">
+                    <h1 class="font-extrabold text-lg text-white tracking-tight flex items-center gap-2">
                         CAFE KITA
-                        <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">Premium</span>
                     </h1>
-                    <div id="header-status-badge" class="flex items-center gap-1.5 text-xs text-stone-400 font-medium">
-                        <!-- Dynamic operational status JS -->
+                    <div id="status-operational" class="flex items-center gap-1.5 text-xs text-stone-400">
+                        <!-- Dynamic Status JavaScript -->
                     </div>
                 </div>
             </div>
 
-            <!-- Cart Trigger Button Header -->
-            <button onclick="toggleCartDrawer()" class="relative p-2.5 sm:px-4 sm:py-2.5 rounded-2xl bg-espresso-800 hover:bg-espresso-700 border border-stone-700/80 text-amber-400 transition-all active:scale-95 flex items-center gap-2">
-                <i class="fa-solid fa-basket-shopping text-lg"></i>
-                <span class="hidden sm:inline text-xs font-bold text-stone-200">Pesanan</span>
-                <span id="cart-badge" class="hidden absolute -top-1.5 -right-1.5 bg-gradient-to-r from-amber-400 to-amber-600 text-espresso-950 text-[11px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-espresso-950 shadow-md">
+            <!-- Cart Trigger Button -->
+            <button onclick="toggleCartModal()" class="relative p-2.5 rounded-xl bg-dark-700 hover:bg-stone-800 border border-stone-700 text-amber-400 transition-all active:scale-95">
+                <i class="fa-solid fa-cart-shopping text-lg"></i>
+                <span id="cart-badge" class="hidden absolute -top-1.5 -right-1.5 bg-amber-500 text-dark-900 text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-dark-900 animate-bounce">
                     0
                 </span>
             </button>
         </div>
     </header>
 
+    <!-- Main Container -->
     <main class="max-w-4xl mx-auto px-4 pt-6 relative z-10">
 
-        <!-- Operational Hours Banner -->
-        <div class="mb-6 p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-amber-950/40 via-espresso-800 to-espresso-900 border border-amber-500/25 shadow-2xl relative overflow-hidden flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div class="absolute -right-8 -bottom-8 text-amber-500/5 text-8xl pointer-events-none font-black">
-                <i class="fa-solid fa-clock"></i>
-            </div>
-            
-            <div class="flex items-center gap-3.5 z-10">
-                <div class="p-3.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-2xl flex-shrink-0">
-                    <i class="fa-regular fa-clock text-2xl"></i>
+        <!-- Banner Info Jam Operasional -->
+        <div class="mb-6 p-4 rounded-2xl bg-gradient-to-r from-amber-950/40 via-dark-800 to-dark-800 border border-amber-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg">
+            <div class="flex items-center gap-3">
+                <div class="p-3 bg-amber-500/10 text-amber-400 rounded-xl">
+                    <i class="fa-regular fa-clock text-xl"></i>
                 </div>
                 <div>
-                    <div class="flex items-center gap-2">
-                        <p class="text-xs font-bold text-amber-400 uppercase tracking-wider">Jam Operasional</p>
-                        <span id="banner-live-indicator" class="inline-flex items-center gap-1 text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                            <!-- Live status JS -->
-                        </span>
-                    </div>
-                    <p class="text-base sm:text-lg font-black text-white mt-0.5">
-                        Setiap Hari: <span class="text-amber-400">09.00 - 20.00 WIB</span>
-                    </p>
-                    <p class="text-xs text-stone-400 mt-0.5">Pesanan masuk setelah jam 20.00 WIB diproses besok pagi.</p>
+                    <p class="text-xs text-stone-400 font-medium">Jam Operasional Cafe</p>
+                    <p class="text-sm font-bold text-stone-200">Setiap Hari: <span class="text-amber-400">09.00 - 20.00 WIB</span></p>
                 </div>
             </div>
-
-            <div class="flex items-center gap-2 text-xs font-semibold px-3.5 py-2 rounded-xl bg-espresso-950/80 border border-stone-800 text-stone-300 w-fit z-10">
-                <i class="fa-solid fa-location-dot text-amber-400"></i>
-                <span>Jl. Kenangan No. 12, Surabaya</span>
+            <div class="text-xs px-3 py-1.5 rounded-lg bg-stone-800 border border-stone-700 text-stone-300 w-fit">
+                📱 WA: +62 811-8805-082
             </div>
         </div>
 
-        <!-- Search & Filter Controls -->
+        <!-- Search Bar & Filters -->
         <div class="space-y-4 mb-6">
             <!-- Search Input -->
             <div class="relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"></i>
-                <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari kopi, mocktail, atau makanan..." 
-                    class="w-full pl-11 pr-10 py-3.5 bg-espresso-800 border border-stone-700/80 rounded-2xl text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all text-sm shadow-inner">
-                <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-500 hover:text-stone-300 p-1">
-                    <i class="fa-solid fa-xmark text-sm"></i>
-                </button>
+                <input type="text" id="search-input" oninput="renderMenu()" placeholder="Cari menu favoritmu..." 
+                    class="w-full pl-11 pr-4 py-3 bg-dark-800 border border-stone-700/80 rounded-2xl text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500 transition-all text-sm shadow-inner">
             </div>
 
-            <!-- Category Pill Tabs -->
-            <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 text-sm font-semibold">
-                <button onclick="setCategory('semua', this)" class="category-btn active px-4 py-2.5 rounded-2xl whitespace-nowrap bg-gradient-to-r from-amber-500 to-amber-600 text-espresso-950 shadow-md shadow-amber-500/20 transition-all transform active:scale-95 flex items-center gap-2">
-                    <span>🔥 Semua Menu</span>
+            <!-- Categories Tabs -->
+            <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 text-sm font-medium">
+                <button onclick="setCategory('semua', this)" class="category-btn active px-4 py-2 rounded-xl whitespace-nowrap bg-amber-500 text-dark-900 font-semibold shadow-md shadow-amber-500/20 transition-all">
+                    🔥 Semua Menu
                 </button>
-                <button onclick="setCategory('kopi', this)" class="category-btn px-4 py-2.5 rounded-2xl whitespace-nowrap bg-espresso-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all transform active:scale-95 flex items-center gap-2">
-                    <span>☕ Kopi</span>
+                <button onclick="setCategory('kopi', this)" class="category-btn px-4 py-2 rounded-xl whitespace-nowrap bg-dark-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all">
+                    ☕ Kopi
                 </button>
-                <button onclick="setCategory('non-kopi', this)" class="category-btn px-4 py-2.5 rounded-2xl whitespace-nowrap bg-espresso-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all transform active:scale-95 flex items-center gap-2">
-                    <span>🍵 Non-Kopi</span>
+                <button onclick="setCategory('non-kopi', this)" class="category-btn px-4 py-2 rounded-xl whitespace-nowrap bg-dark-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all">
+                    🍵 Non-Kopi
                 </button>
-                <button onclick="setCategory('mocktail', this)" class="category-btn px-4 py-2.5 rounded-2xl whitespace-nowrap bg-espresso-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all transform active:scale-95 flex items-center gap-2">
-                    <span>🍹 Mocktail</span>
+                <button onclick="setCategory('mocktail', this)" class="category-btn px-4 py-2 rounded-xl whitespace-nowrap bg-dark-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all">
+                    🍹 Mocktail
                 </button>
-                <button onclick="setCategory('makanan', this)" class="category-btn px-4 py-2.5 rounded-2xl whitespace-nowrap bg-espresso-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all transform active:scale-95 flex items-center gap-2">
-                    <span>🍽️ Makanan Utama</span>
+                <button onclick="setCategory('makanan', this)" class="category-btn px-4 py-2 rounded-xl whitespace-nowrap bg-dark-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all">
+                    🍽️ Makanan Utama
                 </button>
-                <button onclick="setCategory('camilan', this)" class="category-btn px-4 py-2.5 rounded-2xl whitespace-nowrap bg-espresso-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all transform active:scale-95 flex items-center gap-2">
-                    <span>🍟 Camilan</span>
+                <button onclick="setCategory('camilan', this)" class="category-btn px-4 py-2 rounded-xl whitespace-nowrap bg-dark-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all">
+                    🍟 Camilan
                 </button>
             </div>
         </div>
 
-        <!-- Menu Grid -->
-        <div id="menu-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- Dynamic Cards JS -->
+        <!-- Menu Cards Container -->
+        <div id="menu-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Dynamic Rendering via JS -->
         </div>
     </main>
 
-    <!-- Floating Bottom Cart Bar -->
-    <div id="floating-cart" class="fixed bottom-4 left-4 right-4 max-w-xl mx-auto z-30 transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none">
-        <div class="glass-panel rounded-2xl p-3.5 shadow-2xl border border-amber-500/40 flex items-center justify-between pointer-events-auto">
+    <!-- Floating Sticky Cart Bar (Bottom) -->
+    <div id="floating-cart" class="fixed bottom-4 left-4 right-4 max-w-xl mx-auto z-30 transition-all duration-300 transform translate-y-28 opacity-0">
+        <div class="glass-panel rounded-2xl p-3.5 shadow-2xl border border-amber-500/30 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center font-black">
-                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-basket-shopping text-lg"></i>
                 </div>
                 <div>
-                    <span id="floating-qty" class="text-xs font-semibold text-stone-400">0 Produk</span>
-                    <p id="floating-total" class="font-extrabold text-amber-400 text-base sm:text-lg">Rp 0</p>
+                    <span id="floating-qty" class="text-xs text-stone-400 font-medium">0 Produk</span>
+                    <p id="floating-total" class="font-extrabold text-amber-400 text-base">Rp 0</p>
                 </div>
             </div>
-            <button onclick="toggleCartDrawer()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-espresso-950 font-extrabold rounded-xl text-xs sm:text-sm shadow-lg shadow-amber-500/25 flex items-center gap-2 active:scale-95 transition-all">
-                <span>Lihat Keranjang</span>
-                <i class="fa-solid fa-chevron-right text-xs"></i>
+            <button onclick="toggleCartModal()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-dark-900 font-bold rounded-xl text-sm shadow-lg shadow-amber-500/25 flex items-center gap-2 active:scale-95 transition-all">
+                <span>Lihat Pesanan</span>
+                <i class="fa-solid fa-arrow-right"></i>
             </button>
         </div>
     </div>
 
-    <!-- Product Customization Modal -->
-    <div id="product-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden transition-opacity duration-300 opacity-0">
-        <div class="bg-espresso-900 border border-stone-800 w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="relative h-52 bg-stone-900 overflow-hidden">
+    <!-- Modal Kustomisasi Produk -->
+    <div id="product-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden transition-opacity duration-300 opacity-0">
+        <div class="bg-dark-800 border border-stone-700 w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="relative h-48 bg-stone-900 overflow-hidden">
                 <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-espresso-900 via-transparent to-black/40"></div>
-                <button onclick="closeProductModal()" class="absolute top-4 right-4 w-9 h-9 bg-black/60 backdrop-blur-md text-stone-300 rounded-full flex items-center justify-center hover:text-white transition-all border border-white/10">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 w-9 h-9 bg-dark-900/80 backdrop-blur text-stone-300 rounded-full flex items-center justify-center hover:text-white transition-all">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
-                <span id="modal-badge" class="absolute bottom-3 left-4 bg-amber-500 text-espresso-950 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider hidden"></span>
             </div>
-
-            <div class="p-5 sm:p-6 overflow-y-auto space-y-4">
+            <div class="p-6 overflow-y-auto space-y-4">
                 <div>
                     <h3 id="modal-title" class="text-xl font-bold text-white"></h3>
-                    <p id="modal-desc" class="text-stone-400 text-xs mt-1.5 leading-relaxed"></p>
-                    <p id="modal-price" class="text-lg font-extrabold text-amber-400 mt-2"></p>
+                    <p id="modal-desc" class="text-stone-400 text-xs mt-1"></p>
+                    <p id="modal-price" class="text-lg font-bold text-amber-400 mt-2"></p>
                 </div>
 
-                <!-- Temperature / Serving Option -->
-                <div id="option-temp-container" class="space-y-2 pt-3 border-t border-stone-800">
-                    <label class="text-xs font-bold text-stone-300 flex items-center justify-between">
-                        <span>Pilihan Penyajian:</span>
-                        <span class="text-[10px] text-amber-400 uppercase font-semibold">* Wajib dipilih</span>
-                    </label>
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <button type="button" onclick="selectTemp('Dingin')" id="temp-cold" class="temp-opt py-2.5 px-3 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                            🧊 Ice (Dingin)
+                <!-- Opsi Suhu (Jika ada) -->
+                <div id="option-temp-container" class="space-y-2 pt-2 border-t border-stone-700/60">
+                    <label class="text-xs font-semibold text-stone-300">Pilih Penyajian:</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button type="button" onclick="selectTemp('Dingin')" id="temp-cold" class="temp-opt py-2 px-3 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-semibold text-xs flex items-center justify-center gap-2">
+                            🧊 Dingin (Ice)
                         </button>
-                        <button type="button" onclick="selectTemp('Panas')" id="temp-hot" class="temp-opt py-2.5 px-3 rounded-xl border border-stone-800 bg-espresso-800 text-stone-400 font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                            ☕ Hot (Panas)
+                        <button type="button" onclick="selectTemp('Panas')" id="temp-hot" class="temp-opt py-2 px-3 rounded-xl border border-stone-700 bg-dark-700 text-stone-400 font-semibold text-xs flex items-center justify-center gap-2">
+                            ☕ Panas (Hot)
                         </button>
                     </div>
                 </div>
 
-                <!-- Special Note -->
-                <div class="space-y-2 pt-3 border-t border-stone-800">
-                    <label class="text-xs font-bold text-stone-300">Catatan Khusus (Opsional):</label>
-                    <input type="text" id="modal-note" placeholder="Contoh: Less sugar, ekstra es, tidak pedas, dll." 
-                        class="w-full px-3.5 py-2.5 bg-espresso-950 border border-stone-800 rounded-xl text-xs text-stone-200 placeholder-stone-600 focus:outline-none focus:border-amber-500">
+                <!-- Catatan Tambahan -->
+                <div class="space-y-2 pt-2 border-t border-stone-700/60">
+                    <label class="text-xs font-semibold text-stone-300">Catatan Khusus (Opsional):</label>
+                    <input type="text" id="modal-note" placeholder="Contoh: Less sugar, ekstra es, dll." class="w-full px-3.5 py-2.5 bg-dark-900 border border-stone-700 rounded-xl text-xs text-stone-200 focus:outline-none focus:border-amber-500">
                 </div>
             </div>
 
-            <!-- Modal Footer Controls -->
-            <div class="p-4 bg-espresso-950 border-t border-stone-800 flex items-center gap-3">
-                <div class="flex items-center bg-espresso-800 border border-stone-700/80 rounded-xl px-2 py-1">
-                    <button onclick="changeModalQty(-1)" class="w-8 h-8 text-stone-300 hover:text-amber-400 font-extrabold text-lg flex items-center justify-center transition-colors">-</button>
-                    <span id="modal-qty" class="w-8 text-center font-black text-white text-sm">1</span>
-                    <button onclick="changeModalQty(1)" class="w-8 h-8 text-stone-300 hover:text-amber-400 font-extrabold text-lg flex items-center justify-center transition-colors">+</button>
+            <div class="p-4 bg-dark-900 border-t border-stone-700 flex items-center gap-3">
+                <div class="flex items-center bg-dark-700 border border-stone-700 rounded-xl px-2 py-1">
+                    <button onclick="changeModalQty(-1)" class="w-8 h-8 text-stone-300 hover:text-amber-400 font-bold text-lg flex items-center justify-center">-</button>
+                    <span id="modal-qty" class="w-8 text-center font-bold text-white text-sm">1</span>
+                    <button onclick="changeModalQty(1)" class="w-8 h-8 text-stone-300 hover:text-amber-400 font-bold text-lg flex items-center justify-center">+</button>
                 </div>
-                <button onclick="confirmAddToCart()" class="flex-1 py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-espresso-950 font-extrabold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 active:scale-95 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-cart-plus"></i>
-                    <span>Tambah ke Pesanan</span>
+                <button onclick="confirmAddToCart()" class="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-dark-900 font-extrabold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 active:scale-95">
+                    Tambah ke Pesanan
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Cart Slide-over Drawer Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex justify-end hidden transition-opacity duration-300 opacity-0">
-        <div id="cart-drawer" class="bg-espresso-900 w-full max-w-md h-full flex flex-col shadow-2xl border-l border-stone-800 transform transition-transform duration-300 translate-x-full">
-            
+    <!-- Modal Drawer Keranjang / Checkout -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex justify-end hidden transition-opacity duration-300 opacity-0">
+        <div class="bg-dark-800 w-full max-w-md h-full flex flex-col shadow-2xl border-l border-stone-700 transform transition-transform duration-300 translate-x-full" id="cart-drawer">
             <!-- Cart Header -->
-            <div class="p-4 bg-espresso-950 border-b border-stone-800 flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
-                        <i class="fa-solid fa-basket-shopping text-sm"></i>
-                    </div>
-                    <h2 class="font-bold text-white text-base">Keranjang Pesanan</h2>
+            <div class="p-4 bg-dark-900 border-b border-stone-700 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-basket-shopping text-amber-400 text-lg"></i>
+                    <h2 class="font-bold text-white text-base">Keranjang Saya</h2>
                 </div>
-                <button onclick="toggleCartDrawer()" class="w-8 h-8 rounded-xl bg-espresso-800 text-stone-400 hover:text-white flex items-center justify-center border border-stone-700">
-                    <i class="fa-solid fa-xmark text-sm"></i>
+                <button onclick="toggleCartModal()" class="w-8 h-8 rounded-xl bg-dark-700 text-stone-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Cart Items Scroll List -->
+            <!-- Cart Items List -->
             <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3">
-                <!-- Dynamic Items via JS -->
+                <!-- JS Inject -->
             </div>
 
-            <!-- Customer Details Form & Checkout Footer -->
-            <div class="p-4 bg-espresso-950 border-t border-stone-800 space-y-3">
-                <div class="space-y-2">
+            <!-- Form Pemesan -->
+            <div class="p-4 bg-dark-900/90 border-t border-stone-700 space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-300 mb-1">Nama Pemesan *</label>
+                    <input type="text" id="cust-name" placeholder="Masukkan nama Anda..." class="w-full px-3 py-2 bg-dark-800 border border-stone-700 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
                     <div>
-                        <label class="block text-xs font-bold text-stone-300 mb-1">Nama Pemesan <span class="text-rose-500">*</span></label>
-                        <input type="text" id="cust-name" placeholder="Masukkan nama Anda..." class="w-full px-3.5 py-2.5 bg-espresso-800 border border-stone-700 rounded-xl text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-500">
+                        <label class="block text-xs font-semibold text-stone-300 mb-1">Tipe Pesanan</label>
+                        <select id="order-type" class="w-full px-3 py-2 bg-dark-800 border border-stone-700 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
+                            <option value="Dine In (Makan di Tempat)">Dine In (Di Tempat)</option>
+                            <option value="Takeaway (Bawa Pulang)">Takeaway (Bawa Pulang)</option>
+                        </select>
                     </div>
-                    
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-xs font-bold text-stone-300 mb-1">Tipe Pesanan</label>
-                            <select id="order-type" onchange="toggleTableNumInput()" class="w-full px-3 py-2.5 bg-espresso-800 border border-stone-700 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
-                                <option value="Dine In (Makan di Tempat)">Dine In (Di Tempat)</option>
-                                <option value="Takeaway (Bawa Pulang)">Takeaway (Bawa Pulang)</option>
-                            </select>
-                        </div>
-                        <div id="table-num-container">
-                            <label class="block text-xs font-bold text-stone-300 mb-1">No. Meja</label>
-                            <input type="text" id="table-num" placeholder="Misal: Meja 05" class="w-full px-3 py-2.5 bg-espresso-800 border border-stone-700 rounded-xl text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-500">
-                        </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-300 mb-1">No. Meja (Jika Dine In)</label>
+                        <input type="text" id="table-num" placeholder="Ex: Meja 05" class="w-full px-3 py-2 bg-dark-800 border border-stone-700 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
 
-                <!-- Price Summary -->
-                <div class="pt-3 border-t border-stone-800/80 space-y-1.5">
+                <!-- Total Summary -->
+                <div class="pt-2 border-t border-stone-800 space-y-1">
                     <div class="flex justify-between text-xs text-stone-400">
-                        <span>Subtotal Produk</span>
-                        <span id="cart-subtotal" class="font-semibold text-stone-200">Rp 0</span>
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">Rp 0</span>
                     </div>
-                    <div class="flex justify-between text-sm font-black text-white pt-1">
+                    <div class="flex justify-between text-sm font-extrabold text-white pt-1">
                         <span>Total Pembayaran</span>
                         <span id="cart-total" class="text-amber-400">Rp 0</span>
                     </div>
                 </div>
 
-                <!-- WA Order Button -->
-                <button onclick="sendToWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-sm flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all">
+                <!-- Submit WhatsApp Button -->
+                <button onclick="sendToWhatsApp()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all">
                     <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>Kirim Pesanan ke WhatsApp</span>
+                    Pesan Sekarang via WhatsApp
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Custom Toast Notification Component -->
-    <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 bg-amber-500 text-espresso-950 font-extrabold px-5 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm flex items-center gap-2.5 pointer-events-none transition-all duration-300 opacity-0 -translate-y-6 z-50 border border-amber-300">
-        <i class="fa-solid fa-circle-check text-base"></i>
-        <span id="toast-msg">Pesanan berhasil ditambahkan!</span>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 bg-amber-500 text-dark-900 font-bold px-4 py-2.5 rounded-full shadow-xl text-xs flex items-center gap-2 pointer-events-none transition-all duration-300 opacity-0 -translate-y-4 z-50">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toast-msg">Item berhasil ditambahkan!</span>
     </div>
 
-    <!-- JavaScript Application Logic -->
+    <!-- Logic JavaScript -->
     <script>
-        // Database Menu Cafe Kita
+        // Database Menu Cafe
         const menuData = [
             {
                 id: 1,
                 title: "Es Kopi Susu Gula Aren",
                 category: "kopi",
                 price: 18000,
-                desc: "Espresso robusta & arabica pilihan dicampur dengan susu murni creamy dan sirup aren organik.",
+                desc: "Espresso robusta & arabica blended dengan susu segar dan sirup aren asli.",
                 image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
                 badge: "Terfavorit",
                 hasTempOption: true
             },
             {
                 id: 2,
-                title: "Ocean Blue Refreshing Mocktail",
+                title: "Ocean Blue Mocktail",
                 category: "mocktail",
                 price: 22000,
-                desc: "Perpaduan soda dingin, sirup blue curacao premium, perasan lemon asli & daun mint segar.",
+                desc: "Perpaduan soda segar, sirup blue curacao, perasan lemon & mint segar.",
                 image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
-                badge: "Sensasi Segar",
+                badge: "Segar",
                 hasTempOption: false
             },
             {
                 id: 3,
-                title: "Americano Signature",
+                title: "Americano Classic",
                 category: "kopi",
                 price: 15000,
-                desc: "Double shot espresso biji kopi arabica roasting sedang dengan aroma khas khas Cafe Kita.",
+                desc: "Double shot espresso dengan air murni, cita rasa otentik kopi pilihan.",
                 image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
-                badge: "Otentik",
+                badge: "",
                 hasTempOption: true
             },
             {
                 id: 4,
-                title: "Matcha Latte Uji Kyoto",
+                title: "Matcha Latte Premium",
                 category: "non-kopi",
                 price: 24000,
-                desc: "Bubuk hijau matcha asli Uji Kyoto dipadukan sempurna dengan fresh milk yang creamy.",
+                desc: "Bubuk matcha kualitas Uji Jepang dipadu creamy-nya fresh milk.",
                 image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80",
-                badge: "Best Seller",
+                badge: "Recommended",
                 hasTempOption: true
             },
             {
                 id: 5,
-                title: "Nasi Goreng Spesial Cafe Kita",
+                title: "Nasi Goreng Spesial Cafe",
                 category: "makanan",
                 price: 28000,
-                desc: "Nasi goreng bumbu rempah pilihan dilengkapi telur ceplok, sosis panggang, dan kerupuk renyah.",
+                desc: "Nasi goreng bumbu rempah spesial dengan telur ceplok, sosis, dan kerupuk.",
                 image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80",
-                badge: "Kenyang Puas",
+                badge: "Kenyang",
                 hasTempOption: false
             },
             {
                 id: 6,
-                title: "French Fries & Crispy Sausage",
+                title: "French Fries & Sausage",
                 category: "camilan",
                 price: 20000,
-                desc: "Kentang goreng gurih garing disajikan dengan potongan sosis krispi dan saus keju istimewa.",
+                desc: "Kentang goreng renyah disajikan dengan sosis panggang dan saus keju.",
                 image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80",
                 badge: "",
                 hasTempOption: false
-            },
-            {
-                id: 7,
-                title: "Caramel Macchiato",
-                category: "kopi",
-                price: 25000,
-                desc: "Perpaduan vanilla, steamed milk, espresso, dan lelehan saus karamel di atasnya.",
-                image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80",
-                badge: "Manis Gurih",
-                hasTempOption: true
-            },
-            {
-                id: 8,
-                title: "Choco Hazelnut Cream",
-                category: "non-kopi",
-                price: 23000,
-                desc: "Cokelat Belgian pekat disatu padukan dengan cita rasa gurih kacang hazelnut.",
-                image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=600&q=80",
-                badge: "",
-                hasTempOption: true
             }
         ];
 
@@ -466,128 +369,94 @@
         let selectedTemp = 'Dingin';
         let modalQty = 1;
 
-        // Nomor WhatsApp Admin Cafe Kita (Format internasional tanpa simbol '+')
-        const WHATSAPP_NUMBER = "6281234567890";
+        // Nomor WhatsApp Cafe Terbaru
+        const WHATSAPP_NUMBER = "628118805082";
 
-        // Initialization
+        // Inisialisasi saat aplikasi dibuka
         document.addEventListener('DOMContentLoaded', () => {
-            updateOperationalStatus();
+            checkOperationalStatus();
             renderMenu();
-            // Continuously verify store hours every minute
-            setInterval(updateOperationalStatus, 60000);
         });
 
-        // Calculate Operational Hours (09.00 - 20.00 WIB)
-        function updateOperationalStatus() {
+        // Cek Jam Operasional (09.00 - 20.00 WIB)
+        function checkOperationalStatus() {
+            const statusEl = document.getElementById('status-operational');
             const now = new Date();
             const hours = now.getHours();
             
-            // Operational Condition: BUKA starting 09:00 until 19:59 (TUTUP at 20:00)
+            // Jam Buka 09.00 - 20.00
             const isOpen = hours >= 9 && hours < 20;
 
-            const headerBadge = document.getElementById('header-status-badge');
-            const bannerIndicator = document.getElementById('banner-live-indicator');
-
             if (isOpen) {
-                headerBadge.innerHTML = `
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="text-emerald-400 font-extrabold">BUKA SEKARANG</span>
-                    <span class="text-stone-500">| 09.00 - 20.00</span>
+                statusEl.innerHTML = `
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-emerald-400 font-bold">BUKA</span> (09.00 - 20.00)
                 `;
-                bannerIndicator.className = "inline-flex items-center gap-1 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
-                bannerIndicator.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> BUKA SEKARANG`;
             } else {
-                headerBadge.innerHTML = `
-                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                    <span class="text-rose-400 font-extrabold">TUTUP</span>
-                    <span class="text-stone-500">| Buka 09.00 WIB</span>
+                statusEl.innerHTML = `
+                    <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                    <span class="text-rose-400 font-bold">TUTUP</span> (Buka Jam 09.00)
                 `;
-                bannerIndicator.className = "inline-flex items-center gap-1 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30";
-                bannerIndicator.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> TUTUP SAAT INI`;
             }
         }
 
-        // Search Input Handling
-        function handleSearch() {
-            const val = document.getElementById('search-input').value;
-            const clearBtn = document.getElementById('clear-search');
-            if (val.trim() !== '') {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
-            }
-            renderMenu();
-        }
-
-        function clearSearch() {
-            document.getElementById('search-input').value = '';
-            document.getElementById('clear-search').classList.add('hidden');
-            renderMenu();
-        }
-
-        // Filter Category Function
-        function setCategory(category, btnElement) {
-            currentCategory = category;
-            
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.className = "category-btn px-4 py-2.5 rounded-2xl whitespace-nowrap bg-espresso-800 text-stone-400 hover:text-stone-200 border border-stone-700/60 transition-all transform active:scale-95 flex items-center gap-2";
+        // Filter Kategori
+        function setCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(b => {
+                b.classList.remove('bg-amber-500', 'text-dark-900', 'font-semibold', 'shadow-md', 'shadow-amber-500/20');
+                b.classList.add('bg-dark-800', 'text-stone-400', 'border-stone-700/60');
             });
-
-            btnElement.className = "category-btn active px-4 py-2.5 rounded-2xl whitespace-nowrap bg-gradient-to-r from-amber-500 to-amber-600 text-espresso-950 font-bold shadow-md shadow-amber-500/20 transition-all transform active:scale-95 flex items-center gap-2";
+            btn.classList.remove('bg-dark-800', 'text-stone-400', 'border-stone-700/60');
+            btn.classList.add('bg-amber-500', 'text-dark-900', 'font-semibold', 'shadow-md', 'shadow-amber-500/20');
 
             renderMenu();
         }
 
-        // Render Menu Cards Grid
+        // Render Daftar Menu
         function renderMenu() {
             const container = document.getElementById('menu-container');
-            const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            const searchVal = document.getElementById('search-input').value.toLowerCase();
 
-            const filteredMenu = menuData.filter(item => {
-                const matchesCategory = (currentCategory === 'semua') || (item.category === currentCategory);
-                const matchesSearch = item.title.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery);
-                return matchesCategory && matchesSearch;
+            const filtered = menuData.filter(item => {
+                const matchCat = (currentCategory === 'semua') || (item.category === currentCategory);
+                const matchSearch = item.title.toLowerCase().includes(searchVal) || item.desc.toLowerCase().includes(searchVal);
+                return matchCat && matchSearch;
             });
 
-            if (filteredMenu.length === 0) {
+            if (filtered.length === 0) {
                 container.innerHTML = `
-                    <div class="col-span-full py-16 text-center text-stone-500 space-y-3">
-                        <div class="w-16 h-16 mx-auto rounded-full bg-espresso-800 border border-stone-800 flex items-center justify-center text-stone-600 text-2xl">
-                            <i class="fa-solid fa-mug-hot"></i>
-                        </div>
-                        <p class="text-sm font-semibold">Tidak ada menu yang sesuai dengan pencarian Anda.</p>
-                        <button onclick="clearSearch()" class="px-4 py-2 bg-amber-500/10 text-amber-400 rounded-xl text-xs font-bold border border-amber-500/20 hover:bg-amber-500/20">Tampilkan Semua Menu</button>
+                    <div class="col-span-full text-center py-12 text-stone-500">
+                        <i class="fa-solid fa-mug-hot text-4xl mb-3 text-stone-600"></i>
+                        <p class="text-sm">Menu yang Anda cari tidak ditemukan.</p>
                     </div>
                 `;
                 return;
             }
 
-            container.innerHTML = filteredMenu.map(item => `
-                <div class="glass-card rounded-3xl overflow-hidden card-hover flex flex-col justify-between">
+            container.innerHTML = filtered.map(item => `
+                <div class="bg-dark-800 border border-stone-800 rounded-2xl overflow-hidden card-hover flex flex-col justify-between">
                     <div>
-                        <div class="relative h-44 overflow-hidden bg-stone-900 shimmer">
-                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" loading="lazy">
-                            ${item.badge ? `<span class="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-amber-500 text-espresso-950 font-black text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">${item.badge}</span>` : ''}
+                        <div class="relative h-40 overflow-hidden bg-stone-900">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                            ${item.badge ? `<span class="absolute top-3 left-3 bg-amber-500 text-dark-900 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">${item.badge}</span>` : ''}
                         </div>
-                        <div class="p-4 sm:p-5">
-                            <h3 class="font-extrabold text-white text-base leading-snug">${item.title}</h3>
-                            <p class="text-stone-400 text-xs mt-1.5 leading-relaxed line-clamp-2">${item.desc}</p>
+                        <div class="p-4">
+                            <h3 class="font-bold text-white text-base">${item.title}</h3>
+                            <p class="text-stone-400 text-xs mt-1 line-clamp-2">${item.desc}</p>
                         </div>
                     </div>
-                    <div class="px-4 pb-4 sm:px-5 sm:pb-5 pt-1 flex items-center justify-between border-t border-stone-800/60 mt-auto">
-                        <div>
-                            <span class="text-[10px] text-stone-500 font-semibold block">Harga</span>
-                            <span class="font-black text-amber-400 text-base sm:text-lg">Rp ${item.price.toLocaleString('id-ID')}</span>
-                        </div>
-                        <button onclick="openProductModal(${item.id})" class="px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-espresso-950 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 shadow-md shadow-amber-500/15 active:scale-95">
-                            <i class="fa-solid fa-plus text-xs"></i> Pesan
+                    <div class="px-4 pb-4 pt-1 flex items-center justify-between border-t border-stone-800/60">
+                        <span class="font-extrabold text-amber-400 text-base">Rp ${item.price.toLocaleString('id-ID')}</span>
+                        <button onclick="openProductModal(${item.id})" class="px-3.5 py-2 bg-amber-500/10 hover:bg-amber-500 text-amber-400 hover:text-dark-900 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95">
+                            <i class="fa-solid fa-plus"></i> Pesan
                         </button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Customization Modal Logic
+        // Opening Product Options Modal
         function openProductModal(id) {
             selectedProduct = menuData.find(m => m.id === id);
             selectedTemp = 'Dingin';
@@ -599,14 +468,6 @@
             document.getElementById('modal-price').innerText = `Rp ${selectedProduct.price.toLocaleString('id-ID')}`;
             document.getElementById('modal-qty').innerText = modalQty;
             document.getElementById('modal-note').value = '';
-
-            const badgeEl = document.getElementById('modal-badge');
-            if (selectedProduct.badge) {
-                badgeEl.innerText = selectedProduct.badge;
-                badgeEl.classList.remove('hidden');
-            } else {
-                badgeEl.classList.add('hidden');
-            }
 
             const tempContainer = document.getElementById('option-temp-container');
             if (selectedProduct.hasTempOption) {
@@ -637,11 +498,11 @@
             const hotBtn = document.getElementById('temp-hot');
 
             if (type === 'Dingin') {
-                coldBtn.className = 'temp-opt py-2.5 px-3 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-bold text-xs flex items-center justify-center gap-2 transition-all';
-                hotBtn.className = 'temp-opt py-2.5 px-3 rounded-xl border border-stone-800 bg-espresso-800 text-stone-400 font-bold text-xs flex items-center justify-center gap-2 transition-all';
+                coldBtn.className = 'temp-opt py-2 px-3 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-semibold text-xs flex items-center justify-center gap-2';
+                hotBtn.className = 'temp-opt py-2 px-3 rounded-xl border border-stone-700 bg-dark-700 text-stone-400 font-semibold text-xs flex items-center justify-center gap-2';
             } else {
-                hotBtn.className = 'temp-opt py-2.5 px-3 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-bold text-xs flex items-center justify-center gap-2 transition-all';
-                coldBtn.className = 'temp-opt py-2.5 px-3 rounded-xl border border-stone-800 bg-espresso-800 text-stone-400 font-bold text-xs flex items-center justify-center gap-2 transition-all';
+                hotBtn.className = 'temp-opt py-2 px-3 rounded-xl border border-amber-500 bg-amber-500/10 text-amber-400 font-semibold text-xs flex items-center justify-center gap-2';
+                coldBtn.className = 'temp-opt py-2 px-3 rounded-xl border border-stone-700 bg-dark-700 text-stone-400 font-semibold text-xs flex items-center justify-center gap-2';
             }
         }
 
@@ -652,7 +513,7 @@
             }
         }
 
-        // Cart Logic
+        // Confirm Add to Cart
         function confirmAddToCart() {
             const note = document.getElementById('modal-note').value.trim();
             const tempOption = selectedProduct.hasTempOption ? selectedTemp : '';
@@ -678,14 +539,15 @@
 
             closeProductModal();
             updateCartUI();
-            showToast(`" ${selectedProduct.title} " berhasil dimasukkan!`);
+            showToast(`" ${selectedProduct.title} " ditambahkan`);
         }
 
+        // Cart UI Update
         function updateCartUI() {
             const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-            // Badge Header
+            // Badge Update
             const badge = document.getElementById('cart-badge');
             if (totalQty > 0) {
                 badge.innerText = totalQty;
@@ -694,44 +556,41 @@
                 badge.classList.add('hidden');
             }
 
-            // Bottom Floating Bar
+            // Floating Cart Bar Update
             const floatingCart = document.getElementById('floating-cart');
             if (totalQty > 0) {
-                floatingCart.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
-                document.getElementById('floating-qty').innerText = `${totalQty} Item Pesanan`;
+                floatingCart.classList.remove('translate-y-28', 'opacity-0');
+                document.getElementById('floating-qty').innerText = `${totalQty} Produk`;
                 document.getElementById('floating-total').innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
             } else {
-                floatingCart.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+                floatingCart.classList.add('translate-y-28', 'opacity-0');
             }
 
-            // Drawer Items Render
+            // Cart Drawer Render
             const cartItemsEl = document.getElementById('cart-items');
             if (cart.length === 0) {
                 cartItemsEl.innerHTML = `
-                    <div class="text-center py-16 text-stone-500 space-y-2">
+                    <div class="text-center py-16 text-stone-500">
                         <i class="fa-solid fa-basket-shopping text-4xl mb-2 text-stone-600"></i>
-                        <p class="text-xs font-semibold">Keranjang pesanan Anda masih kosong.</p>
-                        <p class="text-[11px] text-stone-600">Pilih menu favorit Anda di atas!</p>
+                        <p class="text-xs">Keranjang belanja Anda masih kosong.</p>
                     </div>
                 `;
             } else {
                 cartItemsEl.innerHTML = cart.map((item, idx) => `
-                    <div class="p-3.5 bg-espresso-800 border border-stone-800 rounded-2xl flex items-center justify-between gap-3 shadow-md">
-                        <div class="flex-1 min-w-0">
-                            <h4 class="font-extrabold text-white text-xs truncate">${item.title}</h4>
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-xs font-bold text-amber-400">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</span>
-                                ${item.temp ? `<span class="text-[9px] px-1.5 py-0.5 bg-amber-500/10 text-amber-400 font-bold rounded-md border border-amber-500/20">${item.temp}</span>` : ''}
-                            </div>
-                            ${item.note ? `<p class="text-[10px] text-stone-400 italic mt-1 bg-espresso-950/60 p-1.5 rounded-lg border border-stone-800">"${item.note}"</p>` : ''}
+                    <div class="p-3 bg-dark-900 border border-stone-800 rounded-xl flex items-center justify-between gap-3">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-white text-xs">${item.title}</h4>
+                            <p class="text-[11px] text-amber-400 font-semibold mt-0.5">Rp ${item.price.toLocaleString('id-ID')}</p>
+                            ${item.temp ? `<span class="inline-block mt-1 text-[10px] px-1.5 py-0.5 bg-stone-800 text-stone-300 rounded">${item.temp}</span>` : ''}
+                            ${item.note ? `<p class="text-[10px] text-stone-400 italic mt-0.5">"${item.note}"</p>` : ''}
                         </div>
-                        <div class="flex items-center gap-2 flex-shrink-0">
-                            <div class="flex items-center bg-espresso-950 border border-stone-700/80 rounded-xl">
-                                <button onclick="updateCartItemQty(${idx}, -1)" class="w-7 h-7 text-stone-300 hover:text-white font-black flex items-center justify-center text-xs">-</button>
-                                <span class="w-6 text-center text-xs font-black text-white">${item.qty}</span>
-                                <button onclick="updateCartItemQty(${idx}, 1)" class="w-7 h-7 text-stone-300 hover:text-white font-black flex items-center justify-center text-xs">+</button>
+                        <div class="flex items-center gap-2">
+                            <div class="flex items-center bg-stone-800 rounded-lg">
+                                <button onclick="updateCartItemQty(${idx}, -1)" class="w-6 h-6 text-stone-300 hover:text-white font-bold flex items-center justify-center text-xs">-</button>
+                                <span class="w-5 text-center text-xs font-bold text-white">${item.qty}</span>
+                                <button onclick="updateCartItemQty(${idx}, 1)" class="w-6 h-6 text-stone-300 hover:text-white font-bold flex items-center justify-center text-xs">+</button>
                             </div>
-                            <button onclick="removeCartItem(${idx})" class="text-stone-500 hover:text-rose-400 p-1.5 transition-colors">
+                            <button onclick="removeCartItem(${idx})" class="text-stone-500 hover:text-rose-400 p-1">
                                 <i class="fa-regular fa-trash-can text-xs"></i>
                             </button>
                         </div>
@@ -756,17 +615,8 @@
             updateCartUI();
         }
 
-        function toggleTableNumInput() {
-            const orderType = document.getElementById('order-type').value;
-            const tableContainer = document.getElementById('table-num-container');
-            if (orderType.includes('Dine In')) {
-                tableContainer.classList.remove('hidden');
-            } else {
-                tableContainer.classList.add('hidden');
-            }
-        }
-
-        function toggleCartDrawer() {
+        // Open/Close Cart Modal Drawer
+        function toggleCartModal() {
             const modal = document.getElementById('cart-modal');
             const drawer = document.getElementById('cart-drawer');
 
@@ -785,10 +635,10 @@
             }
         }
 
-        // Send Order to WhatsApp
+        // WhatsApp Direct Order Logic
         function sendToWhatsApp() {
             if (cart.length === 0) {
-                showToast("⚠️ Keranjang belanja Anda masih kosong!");
+                alert("Keranjang belanja Anda masih kosong!");
                 return;
             }
 
@@ -797,53 +647,51 @@
             const tableNum = document.getElementById('table-num').value.trim();
 
             if (!name) {
-                showToast("⚠️ Silakan isi Nama Pemesan terlebih dahulu!");
+                alert("Harap isi Nama Pemesan terlebih dahulu.");
                 document.getElementById('cust-name').focus();
                 return;
             }
 
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-            // Construct Beautiful WhatsApp Message
+            // Format Pesan WhatsApp
             let text = `☕ *PESANAN BARU - CAFE KITA*\n`;
-            text += `===============================\n`;
+            text += `-------------------------------------------\n`;
             text += `👤 *Nama Pemesan:* ${name}\n`;
             text += `📌 *Tipe Pesanan:* ${orderType}\n`;
-            if (orderType.includes('Dine In') && tableNum) {
-                text += `🪑 *Nomor Meja:* ${tableNum}\n`;
-            }
-            text += `===============================\n\n`;
-            text += `🛒 *RINCIAN MENU PESANAN:*\n`;
+            if (tableNum) text += `🪑 *Nomor Meja:* ${tableNum}\n`;
+            text += `-------------------------------------------\n\n`;
+            text += `📝 *RINCIAN PESANAN:*\n`;
 
             cart.forEach((item, i) => {
                 const sub = item.price * item.qty;
-                text += `*${i + 1}. ${item.title}* (${item.qty}x)\n`;
-                if (item.temp) text += `   ├ Varian: ${item.temp}\n`;
-                if (item.note) text += `   ├ Catatan: _${item.note}_\n`;
+                text += `${i + 1}. *${item.title}* (${item.qty}x)\n`;
+                if (item.temp) text += `   └ Varian: ${item.temp}\n`;
+                if (item.note) text += `   └ Catatan: _${item.note}_\n`;
                 text += `   └ Subtotal: Rp ${sub.toLocaleString('id-ID')}\n\n`;
             });
 
-            text += `===============================\n`;
+            text += `-------------------------------------------\n`;
             text += `💰 *TOTAL PEMBAYARAN:* *Rp ${totalPrice.toLocaleString('id-ID')}*\n`;
-            text += `===============================\n`;
-            text += `Mohon segera dikonfirmasi dan diproses. Terima kasih! 🙏`;
+            text += `-------------------------------------------\n`;
+            text += `Mohon segera diproses ya, terima kasih! 🙏`;
 
             const encodedURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
             window.open(encodedURL, '_blank');
         }
 
-        // Custom Toast Helper
+        // Toast Helper
         function showToast(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = msg;
 
-            toast.classList.remove('opacity-0', '-translate-y-6');
+            toast.classList.remove('opacity-0', '-translate-y-4');
             toast.classList.add('opacity-100', 'translate-y-0');
 
             setTimeout(() => {
-                toast.classList.add('opacity-0', '-translate-y-6');
+                toast.classList.add('opacity-0', '-translate-y-4');
                 toast.classList.remove('opacity-100', 'translate-y-0');
-            }, 2800);
+            }, 2500);
         }
     </script>
 </body>
