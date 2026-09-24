@@ -1,95 +1,1057 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Cafe Kita</title>
+    <title>Menu Cafe Kita - Premium Coffee & Dining</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: {
+                            950: '#0c0a09',
+                            900: '#1c1917',
+                            800: '#292524',
+                            700: '#44403c',
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background-color: #f8f9fa; 
-            margin: 0; 
-            padding: 20px; 
-            text-align: center; 
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0c0a09;
+            color: #f5f5f4;
+            overflow-x: hidden;
         }
-        .tabs { 
-            margin-bottom: 20px; 
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(28, 25, 23, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(217, 119, 6, 0.15);
         }
-        button { 
-            padding: 10px 20px; 
-            margin: 5px; 
-            cursor: pointer; 
-            border: none; 
-            background: #ddd; 
-            border-radius: 5px; 
-            font-weight: bold; 
+
+        .glass-card {
+            background: rgba(41, 37, 36, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        button.active { 
-            background: #d97706; 
-            color: white; 
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(217, 119, 6, 0.4);
+            box-shadow: 0 12px 30px -10px rgba(217, 119, 6, 0.25);
         }
-        .menu-item { 
-            display: none; 
-            background: white; 
-            padding: 15px; 
-            margin: 10px auto; 
-            max-width: 400px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-            text-align: left; 
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        .menu-item.show { 
-            display: block; 
+        ::-webkit-scrollbar-track {
+            background: #0c0a09;
         }
-        .harga { 
-            color: #d97706; 
-            font-weight: bold; 
-            float: right; 
+        ::-webkit-scrollbar-thumb {
+            background: #44403c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+
+        /* Glow & Pulse Animations */
+        @keyframes ambientGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .ambient-glow {
+            animation: ambientGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .pulse-badge {
+            animation: badgePulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Hide scrollbars for categories tab */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Toast animation */
+        @keyframes toastSlide {
+            0% { transform: translateY(100%) scale(0.9); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .toast-enter {
+            animation: toastSlide 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-black">
 
-    <h2>☕ Daftar Menu</h2>
+    <!-- Ambient Background Effects -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-amber-600/10 rounded-full blur-[120px] pointer-events-none ambient-glow"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-amber-800/10 rounded-full blur-[140px] pointer-events-none ambient-glow" style="animation-delay: -4s;"></div>
 
-    <!-- Tombol Kategori -->
-    <div class="tabs">
-        <button class="tab-btn active" onclick="filterMenu('semua', this)">Semua</button>
-        <button class="tab-btn" onclick="filterMenu('kopi', this)">Kopi</button>
-        <button class="tab-btn" onclick="filterMenu('mocktail', this)">Mocktail</button>
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-amber-500/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center text-black font-bold text-xl shadow-lg shadow-amber-600/30">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-serif text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                            CAFE KITA <span class="text-amber-500 text-xs font-sans tracking-widest uppercase border border-amber-500/30 px-2 py-0.5 rounded-full font-semibold">Premium</span>
+                        </h1>
+                        <p class="text-xs text-stone-400 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Buka Hari Ini • 08.00 - 22.00
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Quick Controls -->
+                <div class="flex items-center space-x-3">
+                    <!-- Config WA Info (Tooltips) -->
+                    <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-stone-900/80 border border-stone-800 text-xs text-stone-300">
+                        <i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i>
+                        <span>Order Direct WA: <strong class="text-white" id="display-wa-num">+62 812-3456-7890</strong></span>
+                    </div>
+
+                    <!-- Cart Trigger Button -->
+                    <button id="cart-btn" onclick="toggleCartDrawer(true)" class="relative p-3 rounded-2xl bg-amber-600/10 border border-amber-500/30 hover:bg-amber-600 hover:text-black transition-all duration-300 group text-amber-500">
+                        <i class="fa-solid fa-basket-shopping text-xl transition-transform group-hover:scale-110"></i>
+                        <span id="cart-count-badge" class="absolute -top-1.5 -right-1.5 bg-amber-500 text-black font-extrabold text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-stone-950 shadow-md transform scale-0 transition-transform duration-300">
+                            0
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- Hero Section Banner -->
+        <section class="relative rounded-3xl overflow-hidden glass-card p-6 md:p-10 border border-amber-500/20 bg-gradient-to-r from-stone-900 via-stone-900/90 to-amber-950/40">
+            <div class="relative z-10 max-w-2xl space-y-4">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                    <i class="fa-solid fa-sparkles"></i> Pengalaman Rasa Terbaik
+                </span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold tracking-wide text-white leading-tight">
+                    Cita Rasa Kopi Otentik & Culinary Art Istimewa.
+                </h2>
+                <p class="text-stone-300 text-sm md:text-base leading-relaxed">
+                    Pesan favoritmu langsung dari meja! Pilih varian racikan racikan barista, tambahkan ke keranjang, dan konfirmasi pesanan via WhatsApp tanpa antre.
+                </p>
+
+                <!-- Search Input Bar -->
+                <div class="pt-2 relative max-w-md">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"></i>
+                        <input type="text" id="search-input" oninput="handleSearch()" placeholder="Cari espresso, croissant, mocktail..." 
+                            class="w-full pl-11 pr-10 py-3.5 bg-stone-950/80 border border-stone-800 rounded-2xl text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-sm transition-all shadow-inner">
+                        <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-500 hover:text-stone-300 p-1">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative background elements -->
+            <div class="absolute -right-10 -bottom-10 opacity-10 md:opacity-20 pointer-events-none text-amber-500 text-[220px]">
+                <i class="fa-solid fa-mug-hot"></i>
+            </div>
+        </section>
+
+        <!-- Category Filter Tabs (Chips) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-utensils text-amber-500"></i> Kategori Menu
+                </h3>
+                <span id="menu-counter" class="text-xs text-stone-400">Menampilkan 0 item</span>
+            </div>
+
+            <!-- Chips Container -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar scroll-smooth" id="category-tabs">
+                <!-- Javascript will inject categories here -->
+            </div>
+        </section>
+
+        <!-- Menu Grid Display Area -->
+        <section>
+            <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Menu Cards Injected via JS -->
+            </div>
+
+            <!-- Empty State Search Result -->
+            <div id="empty-state" class="hidden py-16 text-center space-y-4 glass-card rounded-3xl">
+                <div class="w-16 h-16 bg-stone-800/80 rounded-full flex items-center justify-center mx-auto text-stone-500 text-2xl">
+                    <i class="fa-solid fa-face-frown"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-stone-200">Menu Tidak Ditemukan</h4>
+                <p class="text-stone-400 text-sm max-w-sm mx-auto">Coba cari dengan kata kunci lain atau pilih kategori yang berbeda.</p>
+                <button onclick="resetFilters()" class="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-black font-semibold text-xs rounded-xl transition-all">
+                    Tampilkan Semua Menu
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t border-stone-800 bg-stone-950/80 py-8 text-center text-xs text-stone-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <p class="font-serif text-sm text-stone-300 font-semibold">CAFE KITA • Gourmet Coffee & Pastry</p>
+            <p>Jl. Boulevard Utama No. 88, Kota Modern • Telp/WA: +62 812-3456-7890</p>
+            <p class="text-stone-600">© 2026 Cafe Kita. All rights reserved. Express WhatsApp Order System.</p>
+        </div>
+    </footer>
+
+    <!-- PRODUCT DETAIL & CUSTOMIZATION MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="relative w-full max-w-lg bg-stone-900 border border-amber-500/30 rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="modal-container">
+            
+            <!-- Close Button -->
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-white hover:bg-amber-500 hover:text-black flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Modal Header Image -->
+            <div class="relative h-56 w-full bg-stone-950">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-black/30"></div>
+                <div class="absolute bottom-3 left-5 right-5 flex justify-between items-end">
+                    <span id="modal-badge" class="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500 text-black">
+                        Best Seller
+                    </span>
+                    <span id="modal-base-price" class="text-xl font-extrabold text-amber-400">
+                        Rp 0
+                    </span>
+                </div>
+            </div>
+
+            <!-- Modal Content Form -->
+            <div class="p-6 space-y-5 max-h-[60vh] overflow-y-auto">
+                <div>
+                    <h3 id="modal-title" class="font-serif text-2xl font-bold text-white">Product Title</h3>
+                    <p id="modal-desc" class="text-stone-400 text-sm mt-1">Product description goes here...</p>
+                </div>
+
+                <hr class="border-stone-800">
+
+                <!-- Dynamic Customization Options -->
+                <div class="space-y-4" id="modal-options">
+                    
+                    <!-- Option 1: Temperature -->
+                    <div id="option-temp-container">
+                        <label class="block text-xs font-bold text-stone-300 uppercase tracking-wider mb-2">Pilihan Sajian (Suhu)</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="opt-temp" value="Dingin (Ice)" checked class="peer hidden">
+                                <div class="px-4 py-2.5 rounded-xl border border-stone-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 peer-checked:text-amber-400 text-stone-400 text-xs font-semibold text-center transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-cube text-cyan-400"></i> Dingin (Ice)
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="opt-temp" value="Panas (Hot)" class="peer hidden">
+                                <div class="px-4 py-2.5 rounded-xl border border-stone-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 peer-checked:text-amber-400 text-stone-400 text-xs font-semibold text-center transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-fire text-amber-500"></i> Panas (Hot)
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Option 2: Sugar Level -->
+                    <div id="option-sugar-container">
+                        <label class="block text-xs font-bold text-stone-300 uppercase tracking-wider mb-2">Tingkat Manis (Sugar Level)</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="opt-sugar" value="Normal Sugar (100%)" checked class="peer hidden">
+                                <div class="px-2 py-2 rounded-xl border border-stone-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 peer-checked:text-amber-400 text-stone-400 text-[11px] font-semibold text-center transition-all">
+                                    Normal (100%)
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="opt-sugar" value="Less Sugar (50%)" class="peer hidden">
+                                <div class="px-2 py-2 rounded-xl border border-stone-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 peer-checked:text-amber-400 text-stone-400 text-[11px] font-semibold text-center transition-all">
+                                    Less (50%)
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="opt-sugar" value="No Sugar (0%)" class="peer hidden">
+                                <div class="px-2 py-2 rounded-xl border border-stone-700 peer-checked:border-amber-500 peer-checked:bg-amber-500/10 peer-checked:text-amber-400 text-stone-400 text-[11px] font-semibold text-center transition-all">
+                                    No Sugar
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Option 3: Extra Add-ons -->
+                    <div id="option-addons-container">
+                        <label class="block text-xs font-bold text-stone-300 uppercase tracking-wider mb-2">Tambahan (Add-ons)</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-stone-800 bg-stone-950/40 cursor-pointer hover:border-stone-700">
+                                <span class="text-xs text-stone-300 flex items-center gap-2">
+                                    <input type="checkbox" name="opt-addon" value="Extra Shot Espresso (+Rp 5.000)" data-price="5000" class="rounded border-stone-700 text-amber-500 focus:ring-amber-500 bg-stone-900">
+                                    Extra Shot Espresso
+                                </span>
+                                <span class="text-xs font-semibold text-amber-400">+Rp 5.000</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3 rounded-xl border border-stone-800 bg-stone-950/40 cursor-pointer hover:border-stone-700">
+                                <span class="text-xs text-stone-300 flex items-center gap-2">
+                                    <input type="checkbox" name="opt-addon" value="Whipped Cream (+Rp 4.000)" data-price="4000" class="rounded border-stone-700 text-amber-500 focus:ring-amber-500 bg-stone-900">
+                                    Whipped Cream
+                                </span>
+                                <span class="text-xs font-semibold text-amber-400">+Rp 4.000</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Quantity adjustment -->
+                <div class="flex items-center justify-between pt-2">
+                    <span class="text-xs font-bold text-stone-300 uppercase tracking-wider">Jumlah Pesanan</span>
+                    <div class="flex items-center border border-stone-700 rounded-xl bg-stone-950">
+                        <button onclick="adjustModalQty(-1)" class="w-9 h-9 flex items-center justify-center text-amber-400 hover:bg-stone-800 rounded-l-xl transition-colors">
+                            <i class="fa-solid fa-minus text-xs"></i>
+                        </button>
+                        <span id="modal-qty" class="w-10 text-center font-bold text-sm text-white">1</span>
+                        <button onclick="adjustModalQty(1)" class="w-9 h-9 flex items-center justify-center text-amber-400 hover:bg-stone-800 rounded-r-xl transition-colors">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer Action -->
+            <div class="p-4 bg-stone-950 border-t border-stone-800 flex gap-3">
+                <button onclick="addCustomizedProductToCart()" class="w-full py-3.5 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black font-extrabold text-sm rounded-2xl shadow-lg shadow-amber-600/20 flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-cart-plus"></i> Tambahkan Ke Keranjang
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- Daftar Produk -->
-    <div class="menu-item kopi show">
-        <span class="harga">Rp 18.000</span>
-        <h3>Es Kopi Susu Gula Aren</h3>
-        <p style="font-size: 14px; color: #555;">Kopi espresso dengan susu segar dan aren asli.</p>
-    </div>
+    <!-- SLIDING CART DRAWER -->
+    <div id="cart-drawer-overlay" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
     
-    <div class="menu-item mocktail show">
-        <span class="harga">Rp 22.000</span>
-        <h3>Ocean Blue Mocktail</h3>
-        <p style="font-size: 14px; color: #555;">Soda segar dengan sirup blue curacao & lemon.</p>
-    </div>
-    
-    <div class="menu-item kopi show">
-        <span class="harga">Rp 15.000</span>
-        <h3>Americano Dingin</h3>
-        <p style="font-size: 14px; color: #555;">Espresso murni dengan air es segar.</p>
+    <div id="cart-drawer" class="fixed top-0 right-0 z-50 w-full max-w-md h-full bg-stone-900 border-l border-amber-500/20 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        
+        <!-- Drawer Header -->
+        <div class="p-5 border-b border-stone-800 flex items-center justify-between bg-stone-950">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center border border-amber-500/30">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                </div>
+                <div>
+                    <h3 class="font-serif text-lg font-bold text-white">Keranjang Pesanan</h3>
+                    <p class="text-xs text-stone-400">Periksa & lengkapi detail sebelum pesan</p>
+                </div>
+            </div>
+            <button onclick="toggleCartDrawer(false)" class="p-2 text-stone-400 hover:text-white rounded-xl hover:bg-stone-800 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Drawer Cart Items List -->
+        <div class="flex-grow p-5 overflow-y-auto space-y-4" id="cart-items-container">
+            <!-- Items injected by JS -->
+        </div>
+
+        <!-- Drawer Order Form & Checkout Footer -->
+        <div class="p-5 border-t border-stone-800 bg-stone-950 space-y-4">
+            
+            <!-- Customer Information Inputs -->
+            <div class="space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-bold text-stone-300 uppercase tracking-wider mb-1">Nama Pemesan *</label>
+                        <input type="text" id="cust-name" placeholder="Misal: Budi" class="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded-xl text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-stone-300 uppercase tracking-wider mb-1">No. Meja / Tipe *</label>
+                        <input type="text" id="cust-table" placeholder="Misal: Meja 05" class="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded-xl text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-stone-300 uppercase tracking-wider mb-1">Catatan Pesanan (Opsional)</label>
+                    <input type="text" id="cust-notes" placeholder="Misal: Es nya dikit aja, sedotan kertas" class="w-full px-3 py-2 bg-stone-900 border border-stone-700 rounded-xl text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-500">
+                </div>
+            </div>
+
+            <hr class="border-stone-800">
+
+            <!-- Subtotal & Total -->
+            <div class="space-y-1.5 text-xs">
+                <div class="flex justify-between text-stone-400">
+                    <span>Subtotal Menu</span>
+                    <span id="cart-subtotal">Rp 0</span>
+                </div>
+                <div class="flex justify-between text-stone-400">
+                    <span>Layanan & Pajak</span>
+                    <span class="text-emerald-400">Gratis / Included</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-stone-800">
+                    <span>Total Pembayaran</span>
+                    <span id="cart-total" class="text-amber-400">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- WhatsApp Checkout Button -->
+            <button onclick="processWhatsAppCheckout()" class="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-extrabold text-sm rounded-2xl shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 transition-all group">
+                <i class="fa-brands fa-whatsapp text-lg group-hover:scale-110 transition-transform"></i>
+                Kirim Pesanan via WhatsApp
+            </button>
+        </div>
     </div>
 
-    <!-- Logika JavaScript untuk interaksi Tab -->
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
     <script>
-        function filterMenu(kategori, btn) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        // CAFE CONFIGURATION
+        const CAFE_CONFIG = {
+            whatsappNumber: "6281234567890", // Ganti dengan nomor WA Cafe
+            currency: "Rp "
+        };
 
-            document.querySelectorAll('.menu-item').forEach(item => {
-                item.classList.remove('show');
-                if(kategori === 'semua' || item.classList.contains(kategori)) {
-                    item.classList.add('show');
+        // MENU DATABASE
+        const MENU_DATA = [
+            {
+                id: "kopi-1",
+                name: "Es Kopi Susu Gula Aren",
+                category: "kopi",
+                price: 18000,
+                badge: "Best Seller",
+                badgeColor: "bg-amber-500 text-black",
+                desc: "Rasa espresso ganda dipadu dengan susu sapi segar dan sirup gula aren murni khas Nusantara.",
+                image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+                hasTemp: true,
+                hasSugar: true,
+                hasAddons: true
+            },
+            {
+                id: "kopi-2",
+                name: "Americano Dingin / Hot",
+                category: "kopi",
+                price: 15000,
+                badge: "Favorit",
+                badgeColor: "bg-stone-700 text-white",
+                desc: "Double shot espresso biji kopi Arabika house blend dengan air mineral murni yang menyegarkan.",
+                image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80",
+                hasTemp: true,
+                hasSugar: true,
+                hasAddons: true
+            },
+            {
+                id: "kopi-3",
+                name: "Caramel Macchiato",
+                category: "kopi",
+                price: 24000,
+                badge: "Baru",
+                badgeColor: "bg-emerald-500 text-black",
+                desc: "Perpaduan vanilla manis, frothed milk lembut, shot espresso beraroma, dan drizzle sirup karamel gurih.",
+                image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80",
+                hasTemp: true,
+                hasSugar: true,
+                hasAddons: true
+            },
+            {
+                id: "nonkopi-1",
+                name: "Matcha Oat Latte",
+                category: "non-kopi",
+                price: 25000,
+                badge: "Best Seller",
+                badgeColor: "bg-emerald-500 text-black",
+                desc: "Bubuk matcha kualitas Uji Jepang asli diseduh dengan susu Oatside yang creamy dan gurih.",
+                image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80",
+                hasTemp: true,
+                hasSugar: true,
+                hasAddons: false
+            },
+            {
+                id: "nonkopi-2",
+                name: "Artisan Chocolate Float",
+                category: "non-kopi",
+                price: 23000,
+                badge: null,
+                desc: "Minuman cokelat Belgian rich dark chocolate dengan topping es krim vanilla lembut.",
+                image: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=80",
+                hasTemp: true,
+                hasSugar: true,
+                hasAddons: false
+            },
+            {
+                id: "mocktail-1",
+                name: "Ocean Blue Sparkler",
+                category: "mocktail",
+                price: 22000,
+                badge: "Popular",
+                badgeColor: "bg-cyan-500 text-black",
+                desc: "Soda citrus dingin bersensasi segar dengan sirup Blue Curacao, perasan lemon, dan sari selasih.",
+                image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
+                hasTemp: false,
+                hasSugar: false,
+                hasAddons: false
+            },
+            {
+                id: "mocktail-2",
+                name: "Tropical Berry Sunrise",
+                category: "mocktail",
+                price: 24000,
+                badge: null,
+                desc: "Campuran jus jeruk segar, ekstrak buah raspberry murni, mint leaf, dan soda chilled.",
+                image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80",
+                hasTemp: false,
+                hasSugar: false,
+                hasAddons: false
+            },
+            {
+                id: "makanan-1",
+                name: "Croissant Butter Warm",
+                category: "camilan",
+                price: 20000,
+                badge: "Recommended",
+                badgeColor: "bg-amber-500 text-black",
+                desc: "French pastry flaky & renyah di luar, beraroma mentega gurih meleleh di dalam. Disajikan hangat.",
+                image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
+                hasTemp: false,
+                hasSugar: false,
+                hasAddons: false
+            },
+            {
+                id: "makanan-2",
+                name: "Red Velvet Velvet Slice",
+                category: "camilan",
+                price: 26000,
+                badge: null,
+                desc: "Potongan kue Red Velvet lembut dengan lapisan cream cheese frosting lezat manis seimbang.",
+                image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=600&q=80",
+                hasTemp: false,
+                hasSugar: false,
+                hasAddons: false
+            },
+            {
+                id: "makanan-3",
+                name: "Fries & Sausage Platter",
+                category: "makanan utama",
+                price: 32000,
+                badge: "Chef Choice",
+                badgeColor: "bg-amber-600 text-white",
+                desc: "Kentang goreng shoestring renyah disajikan bersama sosis panggang herb dan saus mayo barbecue.",
+                image: "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=600&q=80",
+                hasTemp: false,
+                hasSugar: false,
+                hasAddons: false
+            }
+        ];
+
+        // CATEGORY LIST
+        const CATEGORIES = [
+            { id: "semua", label: "Semua Menu", icon: "fa-border-all" },
+            { id: "kopi", label: "Kopi", icon: "fa-mug-hot" },
+            { id: "non-kopi", label: "Non-Kopi", icon: "fa-glass-water" },
+            { id: "mocktail", label: "Mocktail", icon: "fa-cocktail" },
+            { id: "makanan utama", label: "Makanan Utama", icon: "fa-burger" },
+            { id: "camilan", label: "Dessert & Camilan", icon: "fa-cookie-bite" }
+        ];
+
+        // APP STATE
+        let activeCategory = "semua";
+        let searchQuery = "";
+        let cart = [];
+        let selectedProductModal = null;
+        let modalQty = 1;
+
+        // INITIALIZATION ON LOAD
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("display-wa-num").innerText = "+" + CAFE_CONFIG.whatsappNumber;
+            renderCategories();
+            renderMenuGrid();
+            updateCartUI();
+        });
+
+        // RENDER CATEGORY CHIPS
+        function renderCategories() {
+            const container = document.getElementById("category-tabs");
+            container.innerHTML = CATEGORIES.map(cat => {
+                const isActive = activeCategory === cat.id;
+                return `
+                    <button onclick="setCategory('${cat.id}')" class="px-4 py-2.5 rounded-2xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 border ${
+                        isActive 
+                        ? 'bg-amber-500 text-black border-amber-500 shadow-md shadow-amber-500/20 font-bold' 
+                        : 'bg-stone-900/90 text-stone-300 border-stone-800 hover:border-stone-700 hover:text-white'
+                    }">
+                        <i class="fa-solid ${cat.icon}"></i> ${cat.label}
+                    </button>
+                `;
+            }).join("");
+        }
+
+        // SWITCH CATEGORY
+        function setCategory(catId) {
+            activeCategory = catId;
+            renderCategories();
+            renderMenuGrid();
+        }
+
+        // SEARCH INPUT HANDLER
+        function handleSearch() {
+            const input = document.getElementById("search-input");
+            const clearBtn = document.getElementById("clear-search");
+            searchQuery = input.value.trim().toLowerCase();
+
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove("hidden");
+            } else {
+                clearBtn.classList.add("hidden");
+            }
+
+            renderMenuGrid();
+        }
+
+        function clearSearch() {
+            const input = document.getElementById("search-input");
+            input.value = "";
+            searchQuery = "";
+            document.getElementById("clear-search").classList.add("hidden");
+            renderMenuGrid();
+        }
+
+        function resetFilters() {
+            activeCategory = "semua";
+            clearSearch();
+            renderCategories();
+        }
+
+        // RENDER MENU CARDS GRID
+        function renderMenuGrid() {
+            const grid = document.getElementById("menu-grid");
+            const emptyState = document.getElementById("empty-state");
+            const counter = document.getElementById("menu-counter");
+
+            // Filter products
+            const filtered = MENU_DATA.filter(item => {
+                const matchesCategory = activeCategory === "semua" || item.category === activeCategory;
+                const matchesSearch = item.name.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            counter.innerText = `Menampilkan ${filtered.length} item`;
+
+            if (filtered.length === 0) {
+                grid.classList.add("hidden");
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            grid.classList.remove("hidden");
+            emptyState.classList.add("hidden");
+
+            grid.innerHTML = filtered.map((item, index) => {
+                const badgeHTML = item.badge ? `<span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${item.badgeColor} shadow-md">${item.badge}</span>` : '<div></div>';
+                
+                return `
+                    <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between group" style="animation-delay: ${index * 50}ms">
+                        <div>
+                            <!-- Card Image & Badge -->
+                            <div class="relative h-48 w-full overflow-hidden bg-stone-950 cursor-pointer" onclick="openProductModal('${item.id}')">
+                                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-transparent to-transparent"></div>
+                                <div class="absolute top-3 left-3 right-3 flex justify-between items-center pointer-events-none">
+                                    ${badgeHTML}
+                                </div>
+                            </div>
+
+                            <!-- Card Info -->
+                            <div class="p-5 space-y-2">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-serif text-lg font-bold text-white group-hover:text-amber-400 transition-colors cursor-pointer" onclick="openProductModal('${item.id}')">
+                                        ${item.name}
+                                    </h4>
+                                </div>
+                                <p class="text-stone-400 text-xs line-clamp-2 leading-relaxed">
+                                    ${item.desc}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Footer Price & Action -->
+                        <div class="px-5 pb-5 pt-2 flex items-center justify-between border-t border-stone-800/50">
+                            <div>
+                                <span class="text-[10px] text-stone-500 block uppercase font-bold">Harga</span>
+                                <span class="text-base font-extrabold text-amber-400">${formatRupiah(item.price)}</span>
+                            </div>
+
+                            <div class="flex gap-2">
+                                <!-- Direct Quick Add / Customize Button -->
+                                <button onclick="openProductModal('${item.id}')" class="p-2.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white transition-colors text-xs" title="Lihat Opsi">
+                                    <i class="fa-solid fa-sliders"></i>
+                                </button>
+                                <button onclick="quickAddToCart('${item.id}')" class="px-3 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs transition-all shadow-md shadow-amber-500/20 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-plus"></i> Pesan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        // OPEN PRODUCT CUSTOMIZATION MODAL
+        function openProductModal(productId) {
+            const product = MENU_DATA.find(p => p.id === productId);
+            if (!product) return;
+
+            selectedProductModal = product;
+            modalQty = 1;
+
+            document.getElementById("modal-img").src = product.image;
+            document.getElementById("modal-title").innerText = product.name;
+            document.getElementById("modal-desc").innerText = product.desc;
+            document.getElementById("modal-base-price").innerText = formatRupiah(product.price);
+            document.getElementById("modal-qty").innerText = modalQty;
+
+            // Handle badge visibility
+            const badgeEl = document.getElementById("modal-badge");
+            if (product.badge) {
+                badgeEl.innerText = product.badge;
+                badgeEl.className = `px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${product.badgeColor}`;
+                badgeEl.classList.remove("hidden");
+            } else {
+                badgeEl.classList.add("hidden");
+            }
+
+            // Show/Hide relevant options based on item capabilities
+            document.getElementById("option-temp-container").style.display = product.hasTemp ? "block" : "none";
+            document.getElementById("option-sugar-container").style.display = product.hasSugar ? "block" : "none";
+            document.getElementById("option-addons-container").style.display = product.hasAddons ? "block" : "none";
+
+            // Uncheck all add-ons by default
+            document.querySelectorAll('input[name="opt-addon"]').forEach(cb => cb.checked = false);
+
+            // Show Modal with Animation
+            const modal = document.getElementById("product-modal");
+            const container = document.getElementById("modal-container");
+            modal.classList.remove("opacity-0", "pointer-events-none");
+            container.classList.remove("scale-95");
+            container.classList.add("scale-100");
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById("product-modal");
+            const container = document.getElementById("modal-container");
+            modal.classList.add("opacity-0", "pointer-events-none");
+            container.classList.remove("scale-100");
+            container.classList.add("scale-95");
+            selectedProductModal = null;
+        }
+
+        function adjustModalQty(delta) {
+            if (modalQty + delta >= 1) {
+                modalQty += delta;
+                document.getElementById("modal-qty").innerText = modalQty;
+            }
+        }
+
+        // ADD CUSTOMIZED PRODUCT FROM MODAL TO CART
+        function addCustomizedProductToCart() {
+            if (!selectedProductModal) return;
+
+            const product = selectedProductModal;
+            let itemPrice = product.price;
+            let optionsSummary = [];
+
+            // Read selected temperature
+            if (product.hasTemp) {
+                const tempVal = document.querySelector('input[name="opt-temp"]:checked')?.value;
+                if (tempVal) optionsSummary.push(`Suhu: ${tempVal}`);
+            }
+
+            // Read selected sugar level
+            if (product.hasSugar) {
+                const sugarVal = document.querySelector('input[name="opt-sugar"]:checked')?.value;
+                if (sugarVal) optionsSummary.push(`Gula: ${sugarVal}`);
+            }
+
+            // Read selected add-ons
+            if (product.hasAddons) {
+                document.querySelectorAll('input[name="opt-addon"]:checked').forEach(cb => {
+                    optionsSummary.push(cb.value);
+                    itemPrice += parseInt(cb.getAttribute("data-price") || 0);
+                });
+            }
+
+            // Cart item object
+            const cartItem = {
+                cartItemId: Date.now().toString(),
+                id: product.id,
+                name: product.name,
+                unitPrice: itemPrice,
+                qty: modalQty,
+                options: optionsSummary,
+                image: product.image
+            };
+
+            cart.push(cartItem);
+            updateCartUI();
+            closeProductModal();
+            showToast(`"<strong>${product.name}</strong>" ditambahkan ke keranjang!`);
+            triggerCartBadgePulse();
+        }
+
+        // QUICK ADD (DEFAULT OPTIONS)
+        function quickAddToCart(productId) {
+            const product = MENU_DATA.find(p => p.id === productId);
+            if (!product) return;
+
+            const cartItem = {
+                cartItemId: Date.now().toString(),
+                id: product.id,
+                name: product.name,
+                unitPrice: product.price,
+                qty: 1,
+                options: product.hasTemp ? ["Suhu: Dingin (Ice)", "Gula: Normal (100%)"] : [],
+                image: product.image
+            };
+
+            cart.push(cartItem);
+            updateCartUI();
+            showToast(`"<strong>${product.name}</strong>" ditambahkan ke keranjang!`);
+            triggerCartBadgePulse();
+        }
+
+        // UPDATE CART STATE & RENDER DRAWER
+        function updateCartUI() {
+            const badge = document.getElementById("cart-count-badge");
+            const container = document.getElementById("cart-items-container");
+            const subtotalEl = document.getElementById("cart-subtotal");
+            const totalEl = document.getElementById("cart-total");
+
+            const totalItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            // Badge counter update
+            badge.innerText = totalItemsCount;
+            if (totalItemsCount > 0) {
+                badge.classList.remove("scale-0");
+                badge.classList.add("scale-100");
+            } else {
+                badge.classList.remove("scale-100");
+                badge.classList.add("scale-0");
+            }
+
+            // Empty cart view
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center py-12 text-center space-y-3 text-stone-500">
+                        <i class="fa-solid fa-basket-shopping text-4xl text-stone-700"></i>
+                        <p class="text-sm">Keranjang Anda masih kosong.</p>
+                        <button onclick="toggleCartDrawer(false)" class="text-xs text-amber-500 font-semibold underline hover:text-amber-400">
+                            Pilih Menu Sekarang
+                        </button>
+                    </div>
+                `;
+                subtotalEl.innerText = "Rp 0";
+                totalEl.innerText = "Rp 0";
+                return;
+            }
+
+            // Calculate total price
+            let subtotal = 0;
+            container.innerHTML = cart.map((item, index) => {
+                const itemTotal = item.unitPrice * item.qty;
+                subtotal += itemTotal;
+
+                const optionsHTML = item.options.length > 0 
+                    ? `<div class="text-[11px] text-stone-400 mt-1 space-y-0.5">${item.options.map(opt => `<p>• ${opt}</p>`).join("")}</div>`
+                    : '';
+
+                return `
+                    <div class="p-3.5 rounded-2xl bg-stone-950 border border-stone-800 flex gap-3 items-center">
+                        <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="${item.name}">
+                        <div class="flex-grow min-w-0">
+                            <h5 class="text-xs font-bold text-white truncate">${item.name}</h5>
+                            <span class="text-xs font-extrabold text-amber-400">${formatRupiah(item.unitPrice)}</span>
+                            ${optionsHTML}
+                        </div>
+                        <div class="flex flex-col items-end gap-2 flex-shrink-0">
+                            <button onclick="removeFromCart('${item.cartItemId}')" class="text-stone-500 hover:text-red-400 text-xs transition-colors" title="Hapus">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <div class="flex items-center border border-stone-700 rounded-lg bg-stone-900">
+                                <button onclick="changeCartQty('${item.cartItemId}', -1)" class="w-6 h-6 flex items-center justify-center text-amber-400 hover:bg-stone-800 rounded-l-lg">
+                                    <i class="fa-solid fa-minus text-[10px]"></i>
+                                </button>
+                                <span class="w-6 text-center text-xs font-bold text-white">${item.qty}</span>
+                                <button onclick="changeCartQty('${item.cartItemId}', 1)" class="w-6 h-6 flex items-center justify-center text-amber-400 hover:bg-stone-800 rounded-r-lg">
+                                    <i class="fa-solid fa-plus text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            subtotalEl.innerText = formatRupiah(subtotal);
+            totalEl.innerText = formatRupiah(subtotal);
+        }
+
+        function changeCartQty(cartItemId, delta) {
+            const index = cart.findIndex(i => i.cartItemId === cartItemId);
+            if (index !== -1) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) {
+                    cart.splice(index, 1);
+                }
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(cartItemId) {
+            cart = cart.filter(i => i.cartItemId !== cartItemId);
+            updateCartUI();
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById("cart-drawer");
+            const overlay = document.getElementById("cart-drawer-overlay");
+
+            if (open) {
+                overlay.classList.remove("opacity-0", "pointer-events-none");
+                drawer.classList.remove("translate-x-full");
+            } else {
+                overlay.classList.add("opacity-0", "pointer-events-none");
+                drawer.classList.add("translate-x-full");
+            }
+        }
+
+        function triggerCartBadgePulse() {
+            const badge = document.getElementById("cart-count-badge");
+            badge.classList.add("pulse-badge");
+            setTimeout(() => badge.classList.remove("pulse-badge"), 400);
+        }
+
+        // WHATSAPP MESSAGE FORMATTER & CHECKOUT
+        function processWhatsAppCheckout() {
+            if (cart.length === 0) {
+                showToast("⚠️ Keranjang Anda masih kosong!");
+                return;
+            }
+
+            const custName = document.getElementById("cust-name").value.trim();
+            const custTable = document.getElementById("cust-table").value.trim();
+            const custNotes = document.getElementById("cust-notes").value.trim();
+
+            if (!custName || !custTable) {
+                showToast("⚠️ Harap isi Nama Pemesan dan No. Meja!");
+                return;
+            }
+
+            let totalPayment = 0;
+            let itemsMessage = "";
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.unitPrice * item.qty;
+                totalPayment += itemTotal;
+
+                itemsMessage += `${index + 1}. *${item.name}* (x${item.qty}) - ${formatRupiah(itemTotal)}\n`;
+                if (item.options.length > 0) {
+                    item.options.forEach(opt => {
+                        itemsMessage += `   • _${opt}_\n`;
+                    });
                 }
             });
+
+            // Constructing Formatted WhatsApp Text
+            let waText = `☕ *PESANAN BARU - CAFE KITA*\n`;
+            waText += `----------------------------------\n`;
+            waText += `👤 *Nama Pemesan:* ${custName}\n`;
+            waText += `🪑 *Lokasi / No. Meja:* ${custTable}\n`;
+            waText += `----------------------------------\n`;
+            waText += `📋 *Rincian Pesanan:*\n\n`;
+            waText += itemsMessage;
+            waText += `\n----------------------------------\n`;
+            waText += `💰 *TOTAL PEMBAYARAN:* *${formatRupiah(totalPayment)}*\n`;
+            if (custNotes) {
+                waText += `📝 *Catatan Khusus:* ${custNotes}\n`;
+            }
+            waText += `----------------------------------\n`;
+            waText += `Mohon segera diproses ya, Terima kasih! 🙏`;
+
+            // Encoding URL
+            const encodedText = encodeURIComponent(waText);
+            const whatsappURL = `https://wa.me/${CAFE_CONFIG.whatsappNumber}?text=${encodedText}`;
+
+            // Redirect to WA
+            window.open(whatsappURL, '_blank');
+        }
+
+        // UTILITY FUNCTIONS
+        function formatRupiah(number) {
+            return CAFE_CONFIG.currency + number.toLocaleString('id-ID');
+        }
+
+        function showToast(message) {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast-enter glass-panel px-4 py-3 rounded-2xl border border-amber-500/40 text-xs text-stone-100 shadow-2xl flex items-center gap-2.5 pointer-events-auto";
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-amber-500 text-sm"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transition = "opacity 0.3s ease";
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
     </script>
 </body>
